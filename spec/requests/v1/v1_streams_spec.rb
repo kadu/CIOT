@@ -39,5 +39,13 @@ RSpec.describe "V1::Streams", :type => :request do
       expect(JSON.parse(response.body).length).to be(3)
     end
 
+    it "should return only the last json" do
+      pending
+      get "v1/device/#{@device.id}/streams/last"
+      json = JSON.parse(response.body)
+      expect(json.length).to be(1)
+      expect(json["body"]).to eql({"test" => "test3"})
+    end
+
   end
 end
