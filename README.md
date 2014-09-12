@@ -19,4 +19,4 @@ Send json's from device via post to CIOT, according with this:
 **raw**: A_JSON_WITH_ANY_INFO
 
 
-For Arduino you can download a CIOT Library (comming soon)
+For Arduino you can download a CIOT Library (https://github.com/ciandt-dev/CIOT/tree/master/public/CiotClients)
