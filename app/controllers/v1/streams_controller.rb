@@ -26,7 +26,7 @@ class V1::StreamsController < ApplicationController
 
     begin
       device = Device.find(id) if id
-      streams = device.streams.select(:body,:created_at,:id).limit(100)
+      streams = device.streams.select(:body,:created_at,:id).order("created_at DESC").limit(100)
       
       streams = streams.where("created_at >= ?", date) if date
       streams = streams.where("created_at < ?", end_date) if end_date
