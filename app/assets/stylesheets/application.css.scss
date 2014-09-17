@@ -30,6 +30,8 @@ html {
 }
 
 body {
+  font-family: 'Raleway', sans-serif;
+  font-size: 25;
   padding-top: 20px;
 }
 
@@ -83,4 +85,17 @@ footer {
       margin-left: 10px;
     }
   }
+}
+
+.c_ciot, .i_ciot, .t_ciot {
+  color: #d71f3c;
+}
+.o_ciot {
+  color: #20bec6;
+}
+h1 {
+  font-size: 60;
+}
+h2 {
+  font-size: 40;
 }
