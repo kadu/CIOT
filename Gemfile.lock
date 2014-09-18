@@ -30,6 +30,7 @@ GEM
     arel (5.0.1.20140414130214)
     autoprefixer-rails (3.0.1.20140826)
       execjs
+    bcrypt (3.1.7)
     bcrypt (3.1.7-x86-mingw32)
     bootstrap-sass (3.2.0.1)
       sass (~> 3.2)
@@ -72,6 +73,7 @@ GEM
     multi_json (1.10.1)
     mysql2 (0.3.16)
     orm_adapter (0.5.0)
+    pg (0.17.1)
     pg (0.17.1-x86-mingw32)
     polyglot (0.3.5)
     rack (1.5.2)
@@ -154,6 +156,7 @@ GEM
       rack (>= 1.0)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
