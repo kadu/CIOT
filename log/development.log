@@ -304,65 +304,8 @@ Migrating to AddTokenToUsers (20140911152628)
   [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
 
 
-Started GET "/" for 127.0.0.1 at 2014-09-17 21:47:47 -0300
-
-Mysql2::Error (Access denied for user 'root'@'localhost' (using password: NO)):
-  mysql2 (0.3.16) lib/mysql2/client.rb:70:in `connect'
-  mysql2 (0.3.16) lib/mysql2/client.rb:70:in `initialize'
-  activerecord (4.1.4) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `new'
-  activerecord (4.1.4) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `mysql2_connection'
-  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:435:in `new_connection'
-  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:445:in `checkout_new_connection'
-  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `acquire_connection'
-  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:351:in `block in checkout'
-  /home/kadu/.rvm/rubies/ruby-1.9.3-p547/lib/ruby/1.9.1/monitor.rb:211:in `mon_synchronize'
-  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:350:in `checkout'
-  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:265:in `block in connection'
-  /home/kadu/.rvm/rubies/ruby-1.9.3-p547/lib/ruby/1.9.1/monitor.rb:211:in `mon_synchronize'
-  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:264:in `connection'
-  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:541:in `retrieve_connection'
-  activerecord (4.1.4) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
-  activerecord (4.1.4) lib/active_record/connection_handling.rb:87:in `connection'
-  activerecord (4.1.4) lib/active_record/migration.rb:388:in `check_pending!'
-  activerecord (4.1.4) lib/active_record/migration.rb:377:in `call'
-  actionpack (4.1.4) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
-  activesupport (4.1.4) lib/active_support/callbacks.rb:82:in `run_callbacks'
-  actionpack (4.1.4) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
-  actionpack (4.1.4) lib/action_dispatch/middleware/reloader.rb:73:in `call'
-  actionpack (4.1.4) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
-  actionpack (4.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
-  actionpack (4.1.4) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
-  railties (4.1.4) lib/rails/rack/logger.rb:38:in `call_app'
-  railties (4.1.4) lib/rails/rack/logger.rb:20:in `block in call'
-  activesupport (4.1.4) lib/active_support/tagged_logging.rb:68:in `block in tagged'
-  activesupport (4.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
-  activesupport (4.1.4) lib/active_support/tagged_logging.rb:68:in `tagged'
-  railties (4.1.4) lib/rails/rack/logger.rb:20:in `call'
-  actionpack (4.1.4) lib/action_dispatch/middleware/request_id.rb:21:in `call'
-  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
-  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
-  activesupport (4.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
-  rack (1.5.2) lib/rack/lock.rb:17:in `call'
-  actionpack (4.1.4) lib/action_dispatch/middleware/static.rb:64:in `call'
-  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
-  railties (4.1.4) lib/rails/engine.rb:514:in `call'
-  railties (4.1.4) lib/rails/application.rb:144:in `call'
-  rack (1.5.2) lib/rack/lock.rb:17:in `call'
-  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
-  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
-  /home/kadu/.rvm/rubies/ruby-1.9.3-p547/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
-  /home/kadu/.rvm/rubies/ruby-1.9.3-p547/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
-  /home/kadu/.rvm/rubies/ruby-1.9.3-p547/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
-
-
-  Rendered /home/kadu/.rvm/gems/ruby-1.9.3-p547/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
-  Rendered /home/kadu/.rvm/gems/ruby-1.9.3-p547/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (19.2ms)
-  Rendered /home/kadu/.rvm/gems/ruby-1.9.3-p547/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
-  Rendered /home/kadu/.rvm/gems/ruby-1.9.3-p547/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (32.8ms)
-
-
-Started GET "/" for 127.0.0.1 at 2014-09-17 21:48:21 -0300
-  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Started GET "/" for 127.0.0.1 at 2014-09-18 12:11:15 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (72.8ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
 Processing by HomeController#index as HTML
   Rendered home/index.html.erb within layouts/application (2.3ms)
   Rendered layouts/_shim.html.erb (0.3ms)
