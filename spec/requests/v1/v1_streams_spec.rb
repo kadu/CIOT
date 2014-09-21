@@ -27,8 +27,8 @@ RSpec.describe "V1::Streams", :type => :request do
       #status 401 means unauthorized / should match "render status: :unauthorized" in controller
       get "v1/device/#{@device.id}/streams"
       expect(response.status).to be 401
-      #get "v1/device/#{@device.id}/streams/last"
-      #expect(response.status).to be 401
+      get "v1/device/#{@device.id}/streams/last"
+      expect(response.status).to be 401
       get "v1/device/#{@device.id}/streams/#{@time_stamp.strftime('%d-%m-%Y')}"
       expect(response.status).to be 401
       get "v1/device/#{@device.id}/streams/#{@time_stamp.strftime('%d-%m-%Y')}/#{@time_stamp2.strftime('%d-%m-%Y')}"
@@ -54,11 +54,10 @@ RSpec.describe "V1::Streams", :type => :request do
     end
 
     it "should return only the last json" do
-      skip
       get "v1/device/#{@device.id}/streams/last?token=#{@user.token}"
       json = JSON.parse(response.body)
       expect(json.length).to be(1)
-      expect(json["body"]).to eql({"test" => "test3"})
+      expect(json.first["body"]).to eql({"test" => "test3"})
     end
   end
 
