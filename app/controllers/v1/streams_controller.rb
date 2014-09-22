@@ -1,5 +1,6 @@
 class V1::StreamsController < ApplicationController
   protect_from_forgery :except => :new
+  before_action :validate_access, only: [:list, :last]
 
   def new
     key = request.headers['key']
@@ -15,14 +16,7 @@ class V1::StreamsController < ApplicationController
   end
 
   def list
-    user = User.find_by_token(params[:token])
     id = params[:id]
-    if user.nil? || !user.devices.where(id: id)
-      render status: :unauthorized
-      return
-    end
-
-
 
     if params[:date]
       date = params[:date]
@@ -66,6 +60,14 @@ class V1::StreamsController < ApplicationController
 
 
   private
+    def validate_access
+      user = User.find_by_token(params[:token])
+      if user.nil? || !user.devices.where(id: params[:id])
+        render status: :unauthorized
+        return
+      end
+    end
+
     def is_json_valid?(json_string)
       begin
         JSON.parse(json_string)
