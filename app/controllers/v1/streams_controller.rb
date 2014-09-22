@@ -9,9 +9,9 @@ class V1::StreamsController < ApplicationController
 
     if device && is_json_valid?(body)
       device.streams.create(body: body)
-      render status: :ok
+      render json: {'status': 'success'}
     else
-      render status: :bad_request
+      render json: {'status': 'error', 'error_code': '001'} #change error code for a global constant
     end
   end
 
