@@ -9,10 +9,12 @@ class V1::StreamsController < ApplicationController
 
     if device && is_json_valid?(body)
       device.streams.create(body: body)
-      render json: {'status': 'success'}
+      return_array = ['status' => 'success']
+      render json: return_array
     else
       #change error code for a global constant
-      render json: {'status': 'error', 'error_code': '001'}
+      return_array = ['status' => 'error', 'error_code' => '001']
+      render json: return_array
     end
   end
 
