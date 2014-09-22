@@ -11,7 +11,8 @@ class V1::StreamsController < ApplicationController
       device.streams.create(body: body)
       render json: {'status': 'success'}
     else
-      render json: {'status': 'error', 'error_code': '001'} #change error code for a global constant
+      #change error code for a global constant
+      render json: {'status': 'error', 'error_code': '001'}
     end
   end
 
