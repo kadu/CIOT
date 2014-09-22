@@ -1,16 +1,16 @@
 class V1::StreamsController < ApplicationController
   protect_from_forgery :except => :new
-  
+
   def new
     key = request.headers['key']
     device = Device.find_by_key(key) if key
     body = request.body.read
-    
+
     if device && is_json_valid?(body)
       device.streams.create(body: body)
-      render status: :ok
+      render json: {'status': 'success'}
     else
-      render status: :bad_request
+      render json: {'status': 'error', 'error_code': '001'} #change error code for a global constant
     end
   end
 
@@ -19,7 +19,7 @@ class V1::StreamsController < ApplicationController
 
     if params[:date]
       date = params[:date]
-      end_date = params[:end_date] == nil ? date : params[:end_date] 
+      end_date = params[:end_date] == nil ? date : params[:end_date]
       end_date = Date.parse end_date
       end_date += 1.day
     end
@@ -27,7 +27,7 @@ class V1::StreamsController < ApplicationController
     begin
       device = Device.find(id) if id
       streams = device.streams.select(:body,:created_at,:id).order("created_at DESC").limit(100)
-      
+
       streams = streams.where("created_at >= ?", date) if date
       streams = streams.where("created_at < ?", end_date) if end_date
 
