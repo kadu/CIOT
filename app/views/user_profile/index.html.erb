@@ -15,7 +15,11 @@
       <td><%= @user.id %></td>
       <td><%= @user.email %></td>
       <td><%= @user.last_sign_in_at %></td>
-      <td><%= @user.token %></td>
+      <td><span id="user_token"><%= @user.token %></span>
+        <button type="button" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-floppy-save"></span>Copy to clipboard
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
