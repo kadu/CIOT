@@ -1,0 +1,21 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => 'User Profile' %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:email) %></th>
+    <th><%= model_class.human_attribute_name(:last_sign_in_at) %></th>
+    <th><%= model_class.human_attribute_name(:token) %></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @user.id %></td>
+      <td><%= @user.email %></td>
+      <td><%= @user.last_sign_in_at %></td>
+      <td><%= @user.token %></td>
+    </tr>
+  </tbody>
+</table>
