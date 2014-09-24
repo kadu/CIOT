@@ -17,7 +17,6 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     post 'streams/new'
-    post 'streams/delete'
     get 'device/:id/streams' => 'streams#list'
     get 'device/:id/streams/last' => 'streams#last'
     get 'device/:id/streams/:date' => 'streams#list'
