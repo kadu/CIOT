@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   root 'home#index'
 
   devise_for :users
-  resources :devices
+  resources :devices do
+    get 'streams', :defaults => { :format => 'json' }
+    delete 'streams/delete' => 'devices#delete_streams'
+  end
 
   namespace :v1 do
     post 'streams/new'
