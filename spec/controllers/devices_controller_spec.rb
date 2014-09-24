@@ -30,7 +30,7 @@ RSpec.describe DevicesController, :type => :controller do
 		end
 
 		#New issue in the BugTracker into the GitHub
-		it "should not delete otehr people devices" do
+		it "should not delete other people devices" do
 			sign_in @user
 			expect{
 				delete :destroy, id: @device3.id

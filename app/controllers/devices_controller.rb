@@ -1,11 +1,11 @@
 class DevicesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_device, only: [:show, :edit, :update, :destroy]
+  before_action :set_device_by_id, only: [:streams, :delete_streams]
   # GET /devices
   # GET /devices.json
   def index
     @devices = Device.all_from_user(current_user)
-    
   end
 
   # GET /devices/1
@@ -67,10 +67,27 @@ class DevicesController < ApplicationController
     end
   end
 
+  def streams
+    respond_to do |format|  
+      format.json { render json: @device.streams, status: :ok }
+    end
+  end
+
+  def delete_streams
+    @device.streams.delete_all
+    respond_to do |format|
+      format.html { redirect_to devices_url, notice: 'All Streams have been deleted.' }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_device
       @device = Device.find(params[:id])
+    end
+
+    def set_device_by_id
+      @device = Device.find(params[:device_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
