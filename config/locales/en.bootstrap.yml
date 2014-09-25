@@ -15,8 +15,10 @@ en:
       confirm: "Are you sure?"
       confirm_streams_delete: "Are you sure you want to delete all Streams from this Device?"
       destroy: "Delete"
-      delete_streams: "Delete Streams"
-      show_all_streams: "Show Streams"
+      streams : "Streams"
+      show_all_streams: "Show All"
+      show_last_streams: "Show Last"
+      delete_streams: "Delete"
       new: "New"
       edit: "Edit"
     titles:
@@ -24,3 +26,4 @@ en:
       save: "Save %{model}"
       new: "New %{model}"
       delete: "Delete %{model}"
+
