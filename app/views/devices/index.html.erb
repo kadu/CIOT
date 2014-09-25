@@ -23,7 +23,7 @@
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_device_path(device), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.show_all_streams', :default => t("helpers.links.show_all_streams")),
-                      device_streams_path(device), :class => 'btn btn-default btn-xs', :target => "_blank" %>     
+                      v1_device_streams_path(device, token: 'gvIey9yZoLH5b4Vf6XOM4A'), :class => 'btn btn-default btn-xs', :target => "_blank" %>     
 
           <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
                       device_path(device),
@@ -47,3 +47,4 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_device_path,
             :class => 'btn btn-primary' %>
+

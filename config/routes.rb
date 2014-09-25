@@ -11,14 +11,13 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :devices do
-    get 'streams', :defaults => { :format => 'json' }
     delete 'streams/delete' => 'devices#delete_streams'
   end
 
   namespace :v1 do
     post 'streams/new'
-    get 'device/:id/streams' => 'streams#list'
-    get 'device/:id/streams/last' => 'streams#last'
+    get 'device/:id/streams' => 'streams#list', as: 'device_streams'
+    get 'device/:id/streams/last' => 'streams#last', as: 'device_streams_last'
     get 'device/:id/streams/:date' => 'streams#list'
     get 'device/:id/streams/:date/:end_date' => 'streams#list'
   end
