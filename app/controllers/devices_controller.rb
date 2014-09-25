@@ -67,12 +67,6 @@ class DevicesController < ApplicationController
     end
   end
 
-  def streams
-    respond_to do |format|  
-      format.json { render json: @device.streams, status: :ok }
-    end
-  end
-
   def delete_streams
     @device.streams.delete_all
     respond_to do |format|
