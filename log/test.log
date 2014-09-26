@@ -8336,3 +8336,431 @@ Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 2.2ms)
   [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test3\"}', '2014-09-20 15:58:53', 450, '2014-09-20 15:58:53')[0m
   [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
   [1m[36m (107.2ms)[0m  [1mROLLBACK[0m
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE `devices` (`id` int(11) auto_increment PRIMARY KEY, `key` varchar(255), `name` varchar(255), `description` text, `created_at` datetime, `updated_at` datetime, `user_id` int(11)) ENGINE=InnoDB[0m
+  [1m[35m (8.1ms)[0m  CREATE UNIQUE INDEX `index_devices_on_key` USING btree ON `devices` (`key`) 
+  [1m[36m (5.9ms)[0m  [1mCREATE  INDEX `index_devices_on_user_id` USING btree ON `devices` (`user_id`) [0m
+  [1m[35m (1.6ms)[0m  CREATE TABLE `streams` (`id` int(11) auto_increment PRIMARY KEY, `device_id` int(11), `body` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (1.4ms)[0m  [1mCREATE TABLE `users` (`id` int(11) auto_increment PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `created_at` datetime, `updated_at` datetime, `token` varchar(255)) ENGINE=InnoDB[0m
+  [1m[35m (10.0ms)[0m  CREATE UNIQUE INDEX `index_users_on_email` USING btree ON `users` (`email`) 
+  [1m[36m (6.1ms)[0m  [1mCREATE UNIQUE INDEX `index_users_on_reset_password_token` USING btree ON `users` (`reset_password_token`) [0m
+  [1m[35m (6.2ms)[0m  CREATE UNIQUE INDEX `index_users_on_token` USING btree ON `users` (`token`) 
+  [1m[36m (1.5ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (5.5ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20140911152628')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20140814153505')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20140731153952')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20140807152544')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20140814151514')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20140731153352')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email1@example.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email2@example.com' LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'nVaffBzb5Pbkv4GnP1-Xvw' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email2@example.com', '$2a$04$NLJ2vyvXd9dp3wPhrWhWCu/oilfq0us2AlFaoTIGF9r9UvO3HNpd2', 'nVaffBzb5Pbkv4GnP1-Xvw', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email3@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'kp8rOSHcKC5HUXRkapTb6Q' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email3@example.com', '$2a$04$bpNKKJdqA2M2SKD2dlDdZut1ogTapjzwdhYp7z5HWQ4Uf9dVCb.3O', 'kp8rOSHcKC5HUXRkapTb6Q', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.3ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'eATLBQZck0Fb0nk3xNlXFw' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'eATLBQZck0Fb0nk3xNlXFw', 'Meu nome 2', '2014-09-25 15:21:06', 1)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.3ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'XdSsSmKYDh8XnPZR-lIiTA' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'XdSsSmKYDh8XnPZR-lIiTA', 'Meu nome 3', '2014-09-25 15:21:06', 1)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'v1MF6aYVQYYsaTxClrw8Xw' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'v1MF6aYVQYYsaTxClrw8Xw', 'Meu nome 4', '2014-09-25 15:21:06', 2)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by DevicesController#index as HTML
+  Rendered devices/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 11ms (Views: 6.9ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.9ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email4@example.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'bFEli6FQrYt4hUB5KwRWHw' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email4@example.com', '$2a$04$VwFnLKFXvDXe3L1DLAZ1z.Tv7sFN.tsMzlb0fJZcSaOwxOf/zehbe', 'bFEli6FQrYt4hUB5KwRWHw', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email5@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'H00M12iXGiTTKrQAZUnnXg' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email5@example.com', '$2a$04$g5unULdtB13.hyFEKidn4eLzrCrLBCHicRtunpFWTOS6St0UykrJK', 'H00M12iXGiTTKrQAZUnnXg', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.5ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.3ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'q0ns7sNqRGW4eq9pgjPEVQ' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'q0ns7sNqRGW4eq9pgjPEVQ', 'Meu nome 5', '2014-09-25 15:21:06', 3)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'TaWttGEyNUDwxKkpl9KGmQ' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'TaWttGEyNUDwxKkpl9KGmQ', 'Meu nome 6', '2014-09-25 15:21:06', 3)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'GyHwq7umUMi7NqZMf8Ladg' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'GyHwq7umUMi7NqZMf8Ladg', 'Meu nome 7', '2014-09-25 15:21:06', 4)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by DevicesController#index as HTML
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms)
+  [1m[36mDevice Load (0.3ms)[0m  [1mSELECT `devices`.* FROM `devices`  WHERE `devices`.`user_id` = 3[0m
+  [1m[35m (1.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email6@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'u2hKRyGiWt4ZcnranE0z7w' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email6@example.com', '$2a$04$lIKOvHg3gBTuVTHYL41t0OmmwLf2Sh20ueZuH6fmro.n8DfEUhSze', 'u2hKRyGiWt4ZcnranE0z7w', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email7@example.com' LIMIT 1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'XV0v9zceHSSc6pVFzqmlqQ' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email7@example.com', '$2a$04$5uutOWRMvJQDkWX3c/jRhOMqjrzEuG2fz2udGuiqCkks2/yemvTh2', 'XV0v9zceHSSc6pVFzqmlqQ', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDevice Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'lSixxpGlqhRNDMVzg0fEPg' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'lSixxpGlqhRNDMVzg0fEPg', 'Meu nome 8', '2014-09-25 15:21:06', 5)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDevice Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = '96aWHRpR2Xt9Gi0C4jIE_g' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', '96aWHRpR2Xt9Gi0C4jIE_g', 'Meu nome 9', '2014-09-25 15:21:06', 5)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDevice Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = '1tGMe2J5wKXBJagZ6cFZyg' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', '1tGMe2J5wKXBJagZ6cFZyg', 'Meu nome 10', '2014-09-25 15:21:06', 6)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `devices`
+Processing by DevicesController#destroy as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mDevice Load (0.4ms)[0m  [1mSELECT  `devices`.* FROM `devices`  WHERE `devices`.`id` = 7 LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 5 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM `devices` WHERE `devices`.`id` = 7
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/devices
+Completed 302 Found in 6ms (ActiveRecord: 1.1ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM `devices`
+  [1m[36m (0.9ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email8@example.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'LkFU9TTzzozozeH5G8zT9A' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email8@example.com', '$2a$04$mHwVNFDSa8CEn9DS48K1cOx6mWR/pvcIdNJni5.5wDEsYfCAr7Ne.', 'LkFU9TTzzozozeH5G8zT9A', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email9@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'H2Wzsl5HQOyvgemOKZCc_g' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email9@example.com', '$2a$04$WlLFyCbFuhXSxu1yxS13P.jZHmD/wpQI.6myAQCzIMVQKqqD9PGSa', 'H2Wzsl5HQOyvgemOKZCc_g', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'OK_7J3BW6jfjLrh8gipzFw' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'OK_7J3BW6jfjLrh8gipzFw', 'Meu nome 11', '2014-09-25 15:21:06', 7)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'tkuA_SafG2uyZMVdXiG5TQ' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'tkuA_SafG2uyZMVdXiG5TQ', 'Meu nome 12', '2014-09-25 15:21:06', 7)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'M7zsR4rEGmYvgp8LmkEUug' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'M7zsR4rEGmYvgp8LmkEUug', 'Meu nome 13', '2014-09-25 15:21:06', 8)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM `devices`[0m
+Processing by DevicesController#destroy as HTML
+  Parameters: {"id"=>"12"}
+  [1m[35mDevice Load (0.4ms)[0m  SELECT  `devices`.* FROM `devices`  WHERE `devices`.`id` = 12 LIMIT 1
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 8 LIMIT 1[0m
+Completed 400 Bad Request in 7ms (Views: 4.7ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM `devices`
+  [1m[36m (0.7ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Processing by UserProfileController#index as HTML
+Completed 200 OK in 11ms (Views: 7.4ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email10@example.com' LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = '9sCSc0vHvUcaCbgNT1nq8A' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email10@example.com', '$2a$04$CEOvuPRI0fhRTNWGw/ypTuxJPAIdxAnlNBJGoOAaAanbNj4c3.jRO', '9sCSc0vHvUcaCbgNT1nq8A', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email11@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'NwMim5atfu145qJBN-RmDg' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email11@example.com', '$2a$04$i346RyR0qY/OXA3Z9AUuZueHsaGGTKXdHhG6pwEpxS/Y8zqLoYunG', 'NwMim5atfu145qJBN-RmDg', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'GKS8DxMVsvtiwqCpW6Meeg' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'GKS8DxMVsvtiwqCpW6Meeg', 'Meu nome 14', '2014-09-25 15:21:06', 9)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by V1::StreamsController#new as HTML
+  [1m[36mDevice Load (0.4ms)[0m  [1mSELECT  `devices`.* FROM `devices`  WHERE `devices`.`key` = 'GKS8DxMVsvtiwqCpW6Meeg' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":10}', '2014-09-25 15:21:06', 13, '2014-09-25 15:21:06')[0m
+  [1m[35m (0.5ms)[0m  RELEASE SAVEPOINT active_record_1
+Completed 200 OK in 22ms (Views: 0.6ms | ActiveRecord: 2.9ms)
+  [1m[36m (1.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email12@example.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = '2auig_mZHLNZqY3y8P4Kqw' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email12@example.com', '$2a$04$TrGNtyP33FKpDCz4mUfqG.fytbm3U2E1ax/Fbyy2bQ1zxMEqCBWsG', '2auig_mZHLNZqY3y8P4Kqw', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email13@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = '2fBl5K1HK-0Nb4rJ_2rDIQ' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email13@example.com', '$2a$04$5l6yJtpVrduTapVt0u6J7OEQ6QkHIqwNoDXRrAJXpeoLixVOCPb6O', '2fBl5K1HK-0Nb4rJ_2rDIQ', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'h2pNHUh8g0FhBFPI5lQntA' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'h2pNHUh8g0FhBFPI5lQntA', 'Meu nome 15', '2014-09-25 15:21:06', 11)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by V1::StreamsController#new as HTML
+  [1m[36mDevice Load (0.3ms)[0m  [1mSELECT  `devices`.* FROM `devices`  WHERE `devices`.`key` = 'h2pNHUh8g0FhBFPI5lQntA' LIMIT 1[0m
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.8ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email14@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'MDGIyQPLkFB3VlLZUmrkKw' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email14@example.com', '$2a$04$SGgPLZOy3LWlm72ok7rQ4un4u8vV5.O.jVSal.UsVNctyaLmdwg1G', 'MDGIyQPLkFB3VlLZUmrkKw', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email15@example.com' LIMIT 1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'FoTj7QN7wIpflOvoZnhPPQ' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email15@example.com', '$2a$04$iBqHf2mGMJhyxVzPGyH.9uDF9n36ArBz9B2QyWvzRxg3KYhiSKNhi', 'FoTj7QN7wIpflOvoZnhPPQ', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDevice Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = '3eGMX8VID9L578bhZEkpWw' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', '3eGMX8VID9L578bhZEkpWw', 'Meu nome 16', '2014-09-25 15:21:06', 13)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":10}', '2014-09-25 15:21:06', 15, '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":11}', '2014-09-25 15:21:06', 15, '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mStream Load (0.2ms)[0m  SELECT `streams`.* FROM `streams`  WHERE `streams`.`device_id` = 15
+  [1m[36m (1.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email16@example.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'Dd5aP5kEamGIhzbWdNnnqw' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email16@example.com', '$2a$04$g73FhYgS8fJW0bQsuC/dHu9OH9A6DD.i4t0eFc9yVnIMQFIC1uRy6', 'Dd5aP5kEamGIhzbWdNnnqw', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email17@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'kwYmbstXP80CtCd0SEp43g' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email17@example.com', '$2a$04$cYkJmYuhmlB1oDdGO.SxO.3KwlL6tK24DcrCLxOEQfnKGQqlJcUn.', 'kwYmbstXP80CtCd0SEp43g', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'TjB48bcbJVR68QklKZk_sA' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'awesome device', 'TjB48bcbJVR68QklKZk_sA', 'Device 1', '2014-09-25 15:21:06', 15)[0m
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (1.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email18@example.com' LIMIT 1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'EAm3VVrQxFORaA-008CUsQ' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email18@example.com', '$2a$04$3vf4wCJpsoyu3vKmU9HB0OwizZpfFvq3.UW8GxR9Wt/gf4QqLT3hG', 'EAm3VVrQxFORaA-008CUsQ', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email19@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'fyXs9nile1MGWI4RqvTXUg' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email19@example.com', '$2a$04$iwX4bRBXuhb1TnOQJzW.xedvfZUYlF8rfMTaT3VA6c.eTvVwE654m', 'fyXs9nile1MGWI4RqvTXUg', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'OrGlorZPYmxUVu0cIMTozQ' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'awesome device', 'OrGlorZPYmxUVu0cIMTozQ', 'Device 2', '2014-09-25 15:21:06', 17)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'ooxcEt2TGm-F4Nz8CNpl7A' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'awesome device', 'ooxcEt2TGm-F4Nz8CNpl7A', 'Device 1', '2014-09-25 15:21:06', 17)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.9ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email20@example.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'yvceh9IreEchumMRU5wYgA' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email20@example.com', '$2a$04$tb0rjBxEDY5Oj5hXL1ieNuseuqBEyQghOQDT2WVx0JQyHrzDgErLS', 'yvceh9IreEchumMRU5wYgA', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email21@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = '72VFcBHctvLViSdALTEd0g' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email21@example.com', '$2a$04$78P2zj4SZz4qsihSytwwFu7YW1Hs6NsW/Ge/aeicHSKK16836FVY6', '72VFcBHctvLViSdALTEd0g', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = '-nx31J11e7LpiWSm0jOGNg' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', '-nx31J11e7LpiWSm0jOGNg', 'Meu nome 17', '2014-09-25 15:21:06', 19)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.4ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'E5fmrl6fOSRg1Nix9aFl0g' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'E5fmrl6fOSRg1Nix9aFl0g', 'Meu nome 18', '2014-09-25 15:21:06', 20)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.3ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'sXs4F_S2iuUOrYfkkbkDFA' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'sXs4F_S2iuUOrYfkkbkDFA', 'Meu nome 19', '2014-09-25 15:21:06', 19)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDevice Load (0.2ms)[0m  [1mSELECT `devices`.* FROM `devices`  WHERE `devices`.`user_id` = 19[0m
+  [1m[35m (1.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email22@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'HbXP3GdYin8joR_AiRuotg' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email22@example.com', '$2a$04$4jOt28aVNlOSHvO8d0Ag5et6GeKEMR2SZ6bYC6/9/x3YoojRpMaU2', 'HbXP3GdYin8joR_AiRuotg', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  `users`.* FROM `users`   ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.9ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email23@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = '554RKe7X834OZnsA4EE5Ew' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email23@example.com', '$2a$04$XGY0c51C3XoMmPA7QUZdnuZ/2a1LHtZAmsNXACKYNEb3yz5WdnY1y', '554RKe7X834OZnsA4EE5Ew', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.9ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email24@example.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'zIThyZP6OtFEPVJPB68DXw' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email24@example.com', '$2a$04$udDJVCND1h5cbDxrVFqhMuPqjIRGYVb8S8Oh/zGFN3TJ579Vfe.Lu', 'zIThyZP6OtFEPVJPB68DXw', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email25@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = '0v1tpBeBfD728t71_9jYcQ' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email25@example.com', '$2a$04$S/T7bsEUkOeP61qg1HOILuZ6H.ufJUKODIyooThNtYMYO9jm.avcK', '0v1tpBeBfD728t71_9jYcQ', '2014-09-25 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.9ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email26@example.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'yq0NXmlqiUzwwfzOK4Zhpw' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:06', 'email26@example.com', '$2a$04$URJWuiJMG8m6KN.WNAyaxOx/b0qRA76zcgyAq0t5Ew/ShwIdHJSAW', 'yq0NXmlqiUzwwfzOK4Zhpw', '2014-09-25 15:21:06')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDevice Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'RLshahfuW6syAsCj8IQa1g' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:06', 'Long description on device', 'RLshahfuW6syAsCj8IQa1g', 'Meu nome 20', '2014-09-25 15:21:06', 25)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test1\"}', '2014-09-25 15:21:06', 22, '2014-09-25 15:21:06')[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test2\"}', '2014-09-26 15:21:06', 22, '2014-09-26 15:21:06')
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test3\"}', '2014-09-27 15:21:06', 22, '2014-09-27 15:21:06')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/v1/device/22/streams" for 127.0.0.1 at 2014-09-25 15:21:06 +0000
+Processing by V1::StreamsController#list as HTML
+  Parameters: {"id"=>"22"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`token` IS NULL LIMIT 1[0m
+Completed 500 Internal Server Error in 11711ms
+  [1m[35m (0.9ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email27@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'TPQ7GmfnOC6kLZhfpBBYEg' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:18', 'email27@example.com', '$2a$04$lzhVD4HVVNRRNuPQjvFZtOm8ai4bYfiA0X3j9q4oInDavOCPkxhHK', 'TPQ7GmfnOC6kLZhfpBBYEg', '2014-09-25 15:21:18')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.2ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = '1BoVi4A2RSNRh1MmRl0dQQ' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:18', 'Long description on device', '1BoVi4A2RSNRh1MmRl0dQQ', 'Meu nome 21', '2014-09-25 15:21:18', 26)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test1\"}', '2014-09-25 15:21:18', 23, '2014-09-25 15:21:18')
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test2\"}', '2014-09-26 15:21:18', 23, '2014-09-26 15:21:18')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test3\"}', '2014-09-27 15:21:18', 23, '2014-09-27 15:21:18')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/v1/device/23/streams?token=TPQ7GmfnOC6kLZhfpBBYEg" for 127.0.0.1 at 2014-09-25 15:21:18 +0000
+Processing by V1::StreamsController#list as HTML
+  Parameters: {"token"=>"TPQ7GmfnOC6kLZhfpBBYEg", "id"=>"23"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`token` = 'TPQ7GmfnOC6kLZhfpBBYEg' LIMIT 1
+  [1m[36mDevice Load (0.3ms)[0m  [1mSELECT  `devices`.* FROM `devices`  WHERE `devices`.`id` = 23 LIMIT 1[0m
+  [1m[35mStream Load (0.3ms)[0m  SELECT  `streams`.`body`, `streams`.`created_at`, `streams`.`id` FROM `streams`  WHERE `streams`.`device_id` = 23  ORDER BY created_at DESC LIMIT 100
+Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 0.9ms)
+  [1m[36m (1.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email28@example.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'OatdHJnp08BZqqyvRVcF-A' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:18', 'email28@example.com', '$2a$04$0mFItgZ9myhaFTmyAdYy6.wciNqEutK8XKNdCMBqNxPoN8vOmqSoO', 'OatdHJnp08BZqqyvRVcF-A', '2014-09-25 15:21:18')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDevice Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'gWjJIyrsIdoj9fGXr7svOw' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:18', 'Long description on device', 'gWjJIyrsIdoj9fGXr7svOw', 'Meu nome 22', '2014-09-25 15:21:18', 27)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test1\"}', '2014-09-25 15:21:18', 24, '2014-09-25 15:21:18')[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test2\"}', '2014-09-26 15:21:18', 24, '2014-09-26 15:21:18')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test3\"}', '2014-09-27 15:21:18', 24, '2014-09-27 15:21:18')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/v1/device/24/streams/25-09-2014?token=OatdHJnp08BZqqyvRVcF-A" for 127.0.0.1 at 2014-09-25 15:21:18 +0000
+Processing by V1::StreamsController#list as HTML
+  Parameters: {"token"=>"OatdHJnp08BZqqyvRVcF-A", "id"=>"24", "date"=>"25-09-2014"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`token` = 'OatdHJnp08BZqqyvRVcF-A' LIMIT 1[0m
+  [1m[35mDevice Load (0.2ms)[0m  SELECT  `devices`.* FROM `devices`  WHERE `devices`.`id` = 24 LIMIT 1
+  [1m[36mStream Load (0.5ms)[0m  [1mSELECT  `streams`.`body`, `streams`.`created_at`, `streams`.`id` FROM `streams`  WHERE `streams`.`device_id` = 24 AND (created_at >= '25-09-2014') AND (created_at < '2014-09-26')  ORDER BY created_at DESC LIMIT 100[0m
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+  [1m[35m (1.0ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email29@example.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'IUl-RAJLvDuhwmo4DngLHg' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:18', 'email29@example.com', '$2a$04$sUPNXVgbEiDIL143rfW7neirQSFvcebMkb7pvfa3TcyrRJ6BjJ.62', 'IUl-RAJLvDuhwmo4DngLHg', '2014-09-25 15:21:18')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDevice Exists (0.3ms)[0m  SELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'yM_5kpMvHXwBHGYPruxUkw' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:18', 'Long description on device', 'yM_5kpMvHXwBHGYPruxUkw', 'Meu nome 23', '2014-09-25 15:21:18', 28)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test1\"}', '2014-09-25 15:21:18', 25, '2014-09-25 15:21:18')
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test2\"}', '2014-09-26 15:21:18', 25, '2014-09-26 15:21:18')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test3\"}', '2014-09-27 15:21:18', 25, '2014-09-27 15:21:18')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/v1/device/25/streams/25-09-2014/27-09-2014?token=IUl-RAJLvDuhwmo4DngLHg" for 127.0.0.1 at 2014-09-25 15:21:18 +0000
+Processing by V1::StreamsController#list as HTML
+  Parameters: {"token"=>"IUl-RAJLvDuhwmo4DngLHg", "id"=>"25", "date"=>"25-09-2014", "end_date"=>"27-09-2014"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`token` = 'IUl-RAJLvDuhwmo4DngLHg' LIMIT 1
+  [1m[36mDevice Load (0.2ms)[0m  [1mSELECT  `devices`.* FROM `devices`  WHERE `devices`.`id` = 25 LIMIT 1[0m
+  [1m[35mStream Load (0.3ms)[0m  SELECT  `streams`.`body`, `streams`.`created_at`, `streams`.`id` FROM `streams`  WHERE `streams`.`device_id` = 25 AND (created_at >= '25-09-2014') AND (created_at < '2014-09-28')  ORDER BY created_at DESC LIMIT 100
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.8ms)
+  [1m[36m (1.4ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'email30@example.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`token` = 'WRIlxld9v2LDyxXpd7p0tA' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `token`, `updated_at`) VALUES ('2014-09-25 15:21:18', 'email30@example.com', '$2a$04$I4QYDyTfRiKZA8LxBV3xQePB6GmkcTO.HuChSYZoc0FyAPol.b7/C', 'WRIlxld9v2LDyxXpd7p0tA', '2014-09-25 15:21:18')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDevice Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `devices`  WHERE `devices`.`key` = 'kau28-xlDHidetqw11bAlA' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `devices` (`created_at`, `description`, `key`, `name`, `updated_at`, `user_id`) VALUES ('2014-09-25 15:21:18', 'Long description on device', 'kau28-xlDHidetqw11bAlA', 'Meu nome 24', '2014-09-25 15:21:18', 29)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test1\"}', '2014-09-25 15:21:18', 26, '2014-09-25 15:21:18')[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test2\"}', '2014-09-26 15:21:18', 26, '2014-09-26 15:21:18')
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `streams` (`body`, `created_at`, `device_id`, `updated_at`) VALUES ('{\"test\":\"test3\"}', '2014-09-27 15:21:18', 26, '2014-09-27 15:21:18')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/v1/device/26/streams/last?token=WRIlxld9v2LDyxXpd7p0tA" for 127.0.0.1 at 2014-09-25 15:21:18 +0000
+Processing by V1::StreamsController#last as HTML
+  Parameters: {"token"=>"WRIlxld9v2LDyxXpd7p0tA", "id"=>"26"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`token` = 'WRIlxld9v2LDyxXpd7p0tA' LIMIT 1[0m
+  [1m[35mDevice Load (0.2ms)[0m  SELECT  `devices`.* FROM `devices`  WHERE `devices`.`id` = 26 LIMIT 1
+  [1m[36mStream Load (0.2ms)[0m  [1mSELECT  `streams`.`body`, `streams`.`created_at`, `streams`.`id` FROM `streams`  WHERE `streams`.`device_id` = 26  ORDER BY created_at DESC LIMIT 1[0m
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.8ms)
+  [1m[35m (2.9ms)[0m  ROLLBACK

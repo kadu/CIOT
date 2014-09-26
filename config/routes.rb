@@ -7,6 +7,8 @@
 
 Rails.application.routes.draw do
 
+  resources :triggers
+
   get 'user_profile/index'
 
   root 'home#index'

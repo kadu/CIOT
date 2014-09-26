@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Device:</strong>
+  <%= @trigger.device %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @trigger.title %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @trigger.email %>
+</p>
+
+<p>
+  <strong>Property:</strong>
+  <%= @trigger.property %>
+</p>
+
+<p>
+  <strong>Operation:</strong>
+  <%= @trigger.operation %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @trigger.value %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @trigger.message %>
+</p>
+
+<%= link_to 'Edit', edit_trigger_path(@trigger) %> |
+<%= link_to 'Back', triggers_path %>

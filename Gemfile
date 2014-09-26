@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Specify ruby version (Heroku requirement)
-ruby "1.9.3"
+#ruby "1.9.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -10,7 +10,7 @@ gem 'rails', '4.1.4'
 gem 'pg', group: :production
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'			#test framework 
+  gem 'rspec-rails', '~> 3.0.0'			#test framework
   gem 'factory_girl_rails'					#create fixtures for tests
   gem 'timecop'											#create time mockups
   ################## DATABASE ########################
@@ -60,3 +60,5 @@ gem 'rails_12factor', group: :production
 gem 'bootstrap-sass', '~> 3.2.0'
 # Bootstrap recommends (add browser vendor prefixes automatically)
 gem 'autoprefixer-rails'
+
+gem 'jsonpath'

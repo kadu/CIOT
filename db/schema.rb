@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140911152628) do
+ActiveRecord::Schema.define(version: 20140925152524) do
 
   create_table "devices", force: true do |t|
     t.string   "key"
@@ -31,6 +31,20 @@ ActiveRecord::Schema.define(version: 20140911152628) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "triggers", force: true do |t|
+    t.integer  "device_id"
+    t.string   "title"
+    t.string   "email"
+    t.string   "property"
+    t.string   "operation"
+    t.string   "value"
+    t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "triggers", ["device_id"], name: "index_triggers_on_device_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

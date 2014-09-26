@@ -1,5 +1,6 @@
 class Device < ActiveRecord::Base
   has_many :streams
+  has_many :triggers
   belongs_to :user
 
   before_create :generate_key

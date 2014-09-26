@@ -10,6 +10,7 @@ class V1::StreamsController < ApplicationController
     if device && is_json_valid?(body)
       device.streams.create(body: body)
       return_array = ['status' => 'success']
+      check_triggers(device, body)
       render json: return_array
     else
       #change error code for a global constant
@@ -77,6 +78,15 @@ class V1::StreamsController < ApplicationController
         true
       rescue
         false
+      end
+    end
+
+    def check_triggers(device,stream)
+      device.triggers.each do |trigger|
+        path = JsonPath.new('$.' + trigger.property)
+        value = path.on(stream)
+
+        if (value trigger.operator trigger.value)
       end
     end
 end
