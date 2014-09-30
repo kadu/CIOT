@@ -7,10 +7,18 @@ version: 1
 /v1/streams/new:
   post:
 /v1/device/{id}/streams:
-  get:
-/v1/device/{id}/streams/last:
-  get:
-/v1/device/{id}/streams/{date}:
-  get:
-/v1/device/{id}/streams/{start_date}/{end_date}:
-  get:
+  get:  
+    queryParameters:
+      user_token:
+  /last:
+    get:
+      queryParameters:
+        user_token:
+  /{date}:
+    get:
+      queryParameters:
+        user_token:
+  /{start_date}/{end_date}:
+    get:
+      queryParameters:
+        user_token:
