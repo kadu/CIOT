@@ -1,0 +1,24 @@
+#%RAML 0.8
+title: CIOT
+version: 1
+/user_profile/index:
+  get:
+  
+/v1/streams/new:
+  post:
+/v1/device/{id}/streams:
+  get:  
+    queryParameters:
+      user_token:
+  /last:
+    get:
+      queryParameters:
+        user_token:
+  /{date}:
+    get:
+      queryParameters:
+        user_token:
+  /{start_date}/{end_date}:
+    get:
+      queryParameters:
+        user_token:
