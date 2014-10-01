@@ -3,22 +3,74 @@ title: CIOT
 version: 1
 /user_profile/index:
   get:
-  
+
 /v1/streams/new:
   post:
 /v1/device/{id}/streams:
-  get:  
+  get:
     queryParameters:
       user_token:
+        displayName: User token
+        type: string
+        description: String with user token hash
+        example: yNinAvhd448yMGk2tqpqXA
+        required: true
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "data
+              }
   /last:
     get:
       queryParameters:
         user_token:
+          displayName: User token
+          type: string
+          description: String with user token hash
+          example: yNinAvhd448yMGk2tqpqXA
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "data
+                }
   /{date}:
     get:
       queryParameters:
         user_token:
+          displayName: User token
+          type: string
+          description: String with user token hash
+          example: yNinAvhd448yMGk2tqpqXA
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "data
+                }
   /{start_date}/{end_date}:
     get:
       queryParameters:
         user_token:
+          displayName: User token
+          type: string
+          description: String with user token hash
+          example: yNinAvhd448yMGk2tqpqXA
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "data
+                }
