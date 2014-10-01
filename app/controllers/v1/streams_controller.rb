@@ -86,7 +86,7 @@ class V1::StreamsController < ApplicationController
         path = JsonPath.new('$.' + trigger.property)
         value = path.on(stream)
 
-        if (value trigger.operator trigger.value)
+        #if (value trigger.operator trigger.value)
       end
     end
 end
