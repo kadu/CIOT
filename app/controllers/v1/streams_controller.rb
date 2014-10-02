@@ -86,7 +86,9 @@ class V1::StreamsController < ApplicationController
         path = JsonPath.new('$.' + trigger.property)
         value = path.on(stream)
 
-        #if (value trigger.operator trigger.value)
+        if (value.size > 0 && value[0].to_s.send(trigger.operation, trigger.value))
+           puts 'noix'
+        end
       end
     end
 end
