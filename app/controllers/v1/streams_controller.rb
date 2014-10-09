@@ -85,9 +85,8 @@ class V1::StreamsController < ApplicationController
       device.triggers.each do |trigger|
         path = JsonPath.new('$.' + trigger.property)
         value = path.on(stream)
-
         if (value.size > 0 && value[0].to_s.send(trigger.operation, trigger.value))
-           puts 'noix'
+           TriggerMail.welcome_email(trigger.email).deliver
         end
       end
     end
