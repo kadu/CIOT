@@ -15,6 +15,7 @@ class TriggersController < ApplicationController
   # GET /triggers/new
   def new
     @trigger = Trigger.new
+    @devices = Device.all_from_user(current_user).map { |device| [device.name, device.id] }
   end
 
   # GET /triggers/1/edit

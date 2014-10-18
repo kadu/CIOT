@@ -18,7 +18,7 @@ en:
       streams : "Streams"
       show_all_streams: "Show All"
       show_last_streams: "Show Last"
-      delete_streams: "Delete"
+      delete: "Delete"
       new: "New"
       edit: "Edit"
     titles:

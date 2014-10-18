@@ -37,7 +37,7 @@
           <%= link_to t('.show_last_streams', :default => t("helpers.streams.show_last_streams")),
                       v1_device_streams_last_path(device, token: device.user.token), :class => 'btn btn-default btn-xs', :target => "_blank" %>
 
-          <%= button_to t('.destroy', :default => t("helpers.links.delete_streams")),
+          <%= button_to t('.destroy', :default => t("helpers.links.delete")),
                       device_streams_delete_path(device),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm_streams_delete", :default => 'Are you sure?')) },

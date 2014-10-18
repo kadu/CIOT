@@ -1,37 +1,61 @@
-<h1>Listing triggers</h1>
+<%- trigger = Trigger -%>
 
-<table>
+<div class="page-header">
+  <h1><%=t '.title', :default => trigger.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<% if @triggers.nil? %>
+  <h2>
+    ops, there's no triggers.
+  </h2>
+<% else %>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Device</th>
+      <th>id</th>
+      <th>From Device</th>
       <th>Title</th>
       <th>Email</th>
       <th>Property</th>
       <th>Operation</th>
       <th>Value</th>
       <th>Message</th>
-      <th colspan="3"></th>
+
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @triggers.each do |trigger| %>
       <tr>
-        <td><%= trigger.device %></td>
+        <td><%= trigger.id %></td>
+        <td><%= trigger.device.name %></td>
         <td><%= trigger.title %></td>
         <td><%= trigger.email %></td>
         <td><%= trigger.property %></td>
         <td><%= trigger.operation %></td>
         <td><%= trigger.value %></td>
         <td><%= trigger.message %></td>
-        <td><%= link_to 'Show', trigger %></td>
-        <td><%= link_to 'Edit', edit_trigger_path(trigger) %></td>
-        <td><%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('.show', :default => t("helpers.links.show")),
+                      trigger_path(trigger), :class => 'btn btn-default btn-xs' %>
+        </td>
+
+        <td><%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_trigger_path(trigger), :class => 'btn btn-default btn-xs' %>
+        </td>
+
+        <td>
+        <%= button_to t('.destroy', :default => t("helpers.links.delete")),
+                      trigger_path(trigger),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-info' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
+<% end %>
 <%= link_to 'New Trigger', new_trigger_path %>

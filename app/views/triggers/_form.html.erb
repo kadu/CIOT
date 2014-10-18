@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :device_id %><br>
-    <%= f.text_field :device_id %>
+    <%= select("trigger", "device_id", @devices) %>
   </div>
   <div class="field">
     <%= f.label :title %><br>
