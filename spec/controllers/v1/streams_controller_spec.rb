@@ -19,17 +19,11 @@ RSpec.describe V1::StreamsController, :type => :controller do
       request.headers['key'] = @device.key
       request.headers['HTTP_CONTENT_TYPE'] = "application/json"
       post :new, '{test: 10"}'
-      expect(response.status).to eq(400)
-    end
-
-    it "should be able to delete streams" do
-      @device.streams.create(body: {test: 10}.to_json)
-      @device.streams.create(body: {test: 11}.to_json)
-
-      expect(@device.streams.length).to be 2
-      post :delete
-      expect(response.status).to be_success
-      expect(@device.streams.length).to be 0
+      json = JSON.parse(response.body).first
+      #expectations
+      expect(response.status).to eq(200)
+      expect(json["status"]).to eql "error"
+      expect(json["error_code"]).to eql "001"
     end
   end
 end
