@@ -89,7 +89,6 @@ class V1::StreamsController < ApplicationController
         
         #remove doble quotes
         value = path.on(stream_to_json(stream))
-        binding.pry
         if (value.size > 0 && value[0].to_s.send(trigger.operation, trigger.value))
            TriggerMail.welcome_email(trigger.email).deliver
         end
