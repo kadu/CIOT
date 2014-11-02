@@ -83,11 +83,20 @@ class V1::StreamsController < ApplicationController
 
     def check_triggers(device,stream)
       device.triggers.each do |trigger|
-        path = JsonPath.new('$.' + trigger.property)
-        value = path.on(stream)
+        puts trigger.to_s
+        path = JsonPath.new(trigger.property)
+        puts path.to_s
+        
+        #remove doble quotes
+        value = path.on(stream_to_json(stream))
+        binding.pry
         if (value.size > 0 && value[0].to_s.send(trigger.operation, trigger.value))
            TriggerMail.welcome_email(trigger.email).deliver
         end
       end
+    end
+
+    def stream_to_json(stream)
+      JSON.parse(stream)
     end
 end
