@@ -366,23 +366,13 @@
                                                 <table border="0" cellpadding="20" cellspacing="0" width="100%">
                                                     <tr>
                                                         <td valign="top">
-                                                            <div mc:edit="std_content00">
-                                                                <h1 class="h1">
-                                                                	<%= #{@title} %> was triggered
-                                                                </h1>
-                                                                <strong>Following trigger:</strong> 
-                                                                @property
-                                                                @operation
-                                                                @value
+														    <h1 class="h1"><%= @title %></h1>
+														  	<strong>Following trigger:</strong> 
+                                                                <%=  @property %>
+                                                                <%=  @operation %>
+                                                                <%=  @value %>
 
                                                                 is in true condition.
-
-                                                                <br />
-                                                                <br />
-                                                                
-                                                                To check the trigger go to the following
-                                                                <a href="<%= request.domain %>/triggers/<%= @id %>
-                                                                " target="_blank">link</a>
                                                             </div>
 														</td>
                                                     </tr>
