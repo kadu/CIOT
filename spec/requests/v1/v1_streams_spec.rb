@@ -61,4 +61,68 @@ RSpec.describe "V1::Streams", :type => :request do
     end
   end
 
+  describe "mail deliver" do
+  	before(:each) do
+  		@user = 			FactoryGirl.create(:user)
+			@device = 		FactoryGirl.create(:device, user: @user)
+			#@rule =				FactoryGirl.create(:trigger, device: @device)
+  	end
+
+  	it "when stream rule matches should send an email" do
+  		#create a rule
+  		@rule =	FactoryGirl.create(:trigger, device: @device, operation: ">", value: "30", property: "degree")
+  		#set request header with the key
+  		requested = {'ACCEPT' => "application/json", 'CONTENT_TYPE' => 'application/json', 'key' => @device.key}
+  		#create an device stream so it could match the operation.
+  		stream = {"degree" => "31"}.to_json
+
+  		post "/v1/streams/new", stream, requested
+  		
+  		expect(response.body).to include("status")
+  		expect(response.body).to include("success")
+
+  		#check expectations when there is an last
+  		email_sent = ActionMailer::Base.deliveries.last
+  		expect(email_sent.body).to match /is in true condition./
+  		#expect to send email to email recipient
+  		expect(email_sent['to'].to_s).to match(@rule.email)
+  	end
+  	it "when stream rule does not matches shouldn't send any email" do
+  		#create a rule
+  		@rule =	FactoryGirl.create(:trigger, device: @device, operation: "<", value: "30", property: "degree")
+  		#set request header with the key
+  		requested = {'ACCEPT' => "application/json", 'CONTENT_TYPE' => 'application/json', 'key' => @device.key}
+  		#create an device stream so it could match the operation.
+  		stream = {"degree" => "31"}.to_json
+
+  		post "/v1/streams/new", stream, requested
+  		
+  		expect(response.body).to include("status")
+  		expect(response.body).to include("success")
+
+  		#check expectations when there is an last
+  		email_sent = ActionMailer::Base.deliveries.last
+  		#expect to send email to email recipient
+  		expect(email_sent['to'].to_s).not_to match(@rule.email)
+  	end
+
+  	it "when stream rule matches should send an email" do
+  		#create a rule
+  		@rule =	FactoryGirl.create(:trigger, device: @device, operation: "==", value: "hot", property: "degree")
+  		#set request header with the key
+  		requested = {'ACCEPT' => "application/json", 'CONTENT_TYPE' => 'application/json', 'key' => @device.key}
+  		#create an device stream so it could match the operation.
+  		stream = {"degree" => "hot"}.to_json
+
+  		post "/v1/streams/new", stream, requested
+  		
+  		expect(response.body).to include("status")
+  		expect(response.body).to include("success")
+
+  		#check expectations when there is an last
+  		email_sent = ActionMailer::Base.deliveries.last
+  		#expect to send email to email recipient
+  		expect(email_sent['to'].to_s).to match(@rule.email)
+  	end
+  end
 end

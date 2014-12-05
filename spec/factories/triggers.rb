@@ -1,13 +1,13 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
+
   factory :trigger do
-    device nil
-    title "MyString"
-    email "MyString"
-    property "MyString"
-    operation "MyString"
-    value "MyString"
-    message "MyString"
+    title "rule "
+    email
+    property "test"
+    operation "<"
+    value "30"
+    message "MyString message"
   end
 end
