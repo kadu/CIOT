@@ -124,5 +124,24 @@ RSpec.describe "V1::Streams", :type => :request do
   		#expect to send email to email recipient
   		expect(email_sent['to'].to_s).to match(@rule.email)
   	end
+
+    it "when nested stream JSON is sent and matches a trigger should send an email" do
+      #create a rule
+      @rule = FactoryGirl.create(:trigger, device: @device, operation: "==", value: "ok", property: "status")
+      #set request header with the key
+      requested = {'ACCEPT' => "application/json", 'CONTENT_TYPE' => 'application/json', 'key' => @device.key}
+      #create an device stream so it could match the operation.
+      stream = {"body" =>{"status" => "ok"}}.to_json
+
+      post "/v1/streams/new", stream, requested
+      
+      expect(response.body).to include("status")
+      expect(response.body).to include("success")
+
+      #check expectations when there is an last
+      email_sent = ActionMailer::Base.deliveries.last
+      #expect to send email to email recipient
+      expect(email_sent['to'].to_s).to match(@rule.email)
+    end
   end
 end
