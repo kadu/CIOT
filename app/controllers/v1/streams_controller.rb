@@ -86,12 +86,17 @@ class V1::StreamsController < ApplicationController
         path = JsonPath.new("$..#{trigger.property}")
         #remove doble quotes
         values = path.on(stream_to_json(stream))
-        values.each do |value|
-	        if (value.size > 0 && value.to_s.send(trigger.operation, trigger.value))
-	           TriggerMail.trigger_activate(trigger).deliver
-	           break
-	        end
-	      end
+        
+        deliver_mail_on_trigger values, trigger
+      end
+    end
+
+    def deliver_mail_on_trigger values, trigger
+    	values.each do |value|
+        if (value.size > 0 && value.to_s.send(trigger.operation, trigger.value))
+           TriggerMail.trigger_activate(trigger).deliver
+           break
+        end
       end
     end
 
