@@ -143,5 +143,64 @@ RSpec.describe "V1::Streams", :type => :request do
       #expect to send email to email recipient
       expect(email_sent['to'].to_s).to match(@rule.email)
     end
+
+    describe "when we have list of a property inside json" do
+      it "should trigger one event if condition matches" do
+        #create a rule
+        @rule = FactoryGirl.create(:trigger, device: @device, operation: "<", value: "30", property: "umidade")
+        #set request header with the key
+        requested = {'ACCEPT' => "application/json", 'CONTENT_TYPE' => 'application/json', 'key' => @device.key}
+        #create an device stream so it could match the operation.
+        stream = {"body"=> {
+                      "umidade"=> "10",
+                      "montain"=> {
+                          "umidade"=> "100"
+                      }
+                  },
+                  "umidade"=> "40",
+                  "test"=> "10"
+              }.to_json
+
+        post "/v1/streams/new", stream, requested
+        
+        expect(response.body).to include("status")
+        expect(response.body).to include("success")
+
+        #check expectations when there is an last
+        email_sent = ActionMailer::Base.deliveries.last
+        #expect to send email to email recipient
+        expect(email_sent['to'].to_s).to match(@rule.email)
+      end
+
+      it "should deliver only one email for multiple matches" do
+        #create a rule
+        @rule = FactoryGirl.create(:trigger, device: @device, operation: ">", value: "30", property: "umidade")
+        #set request header with the key
+        requested = {'ACCEPT' => "application/json", 'CONTENT_TYPE' => 'application/json', 'key' => @device.key}
+        #create an device stream so it could match the operation.
+        stream = {"body"=> {
+                      "umidade"=> "10",
+                      "montain"=> {
+                          "umidade"=> "100"
+                      }
+                  },
+                  "umidade"=> "40",
+                  "test"=> "10"
+              }.to_json
+
+        post "/v1/streams/new", stream, requested
+        
+        expect(response.body).to include("status")
+        expect(response.body).to include("success")
+
+        #check expectations when there is an last
+        email_sent = ActionMailer::Base.deliveries.last
+        before_email_sent = ActionMailer::Base.deliveries[-2]
+        #expect last send email to email recipient
+        expect(email_sent['to'].to_s).to match(@rule.email)
+        #expect before last email to email to have different recipient
+        expect(before_email_sent['to'].to_s).not_to match(@rule.email)
+      end
+    end
   end
 end
