@@ -90,7 +90,6 @@ class V1::StreamsController < ApplicationController
 	        if (value.size > 0 && value.to_s.send(trigger.operation, trigger.value))
 	           TriggerMail.trigger_activate(trigger).deliver
 	           break
-	           puts "Email Triggered"
 	        end
 	      end
       end
